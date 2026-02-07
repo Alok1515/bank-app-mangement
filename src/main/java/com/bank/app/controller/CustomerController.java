@@ -13,6 +13,7 @@ import java.util.List;
 public class CustomerController {
 
     private final CustomerService customerService;
+    private Long id;
 
     public CustomerController(CustomerService customerService) {
         this.customerService = customerService;
@@ -30,6 +31,7 @@ public class CustomerController {
 
     @GetMapping ("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
+        this.id = id;
         return customerService.getCustomerById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
